@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: Verdana, sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #eceadd;
+    color: #4e272a;
+}
+
+.game-container {
+    padding: 5px;
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    margin: 0 20%;
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+
+h1, h2, h3{
+    padding: 3px;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 1.4em;
+}
+
+.section {
+    width: 100%;
+    text-align: center;
+}
+
+.pile {
+    width: 30%;
+    display: inline-block;
+    position: relative;
+}
+.hand {
+    width: 90%;
+    display: inline-block;
+    position: relative;
+}
+
+.card {
+    display: inline-block;
+    position: relative;
+    background-color: white;
+    width: 80px;
+    height: 130px;
+    margin: 4px;
+    border-radius: 8px;
+    border: solid 6px #4e272a;
+}
+
+.card p {
+    padding-top: 40px;
+    text-align: center;
+    font-size: 1.6em;
+    width: 100%;
+    height: 100%;
+}
+
+.face-down,
+.face-up {
+    width: 100%;
+    height: 100%;
+}
+
+.face-down {
+    background-color: #93AC97;
+}
+
+.face-down p {
+    opacity: 0;
+}
+
+.click {
+    cursor: pointer;
+    position: absolute;
+    text-align: center;
+    padding-left: 2px;
+    padding-top: 30px;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.player-actions .hide-at-start {
+    display: none;
+}
+
+form {
+    padding: 14px;
+}
+label{
+    padding: 16px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: white;
+}
+select, button {
+    margin-top: 5px;
+    padding: 16px 20px;
+    border-radius: 4px;
+    background-color: white;
+    border: solid 3px #4e272a;
+    cursor: pointer
+}
+
+button:hover {
+    background-color: #93AC97;
+}
+
+button:active {
+    background-color: #4e272a;
+}
+
+

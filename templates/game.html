@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Sen Game</title>
+{% endblock %}
+
+{% block body %}
+    <div class="game-container">
+    <h1>Sen Game</h1>
+    <h2>Current Turn: Player {{ current_player + 1 }}</h2>
+        <div class="container">
+            {% for player_hand in players %}
+                <div>
+                    <h3>Player {{ loop.index }}'s Hand:</h3>
+                    <div class="section">
+                        {% for card in player_hand %}
+                            <div class="card">
+                            <div class="face-down">
+                                <p>
+                                    {{ card.number }}{% if card.action %}{{ card.action }}{% endif %}
+                                </p>
+                            </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <div class="pile">
+                    <h3>Face-Down Pile</h3>
+                    <div class="card">
+                    <div class="click" onclick="revealFaceDown()">
+                    Click<br>to<br>Reveal
+                    </div>
+                        <div class="face-down">
+                            <p>
+                            {{ face_down_top.number }}{% if face_down_top.action %}{{ face_down_top.action }}{% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="pile">
+                    <h3>Face-Up Pile</h3>
+                    <div class="card">
+                        <div class="face-up">
+                            {% if updated_card %}
+                                <p>{{ updated_card.number }}{% if updated_card.action %}{{ updated_card.action }}{% endif %}</p>
+                            {% else %}
+                                <p>{{ face_up_top.number }}{% if face_up_top.action %}{{ face_up_top.action }}{% endif %}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <div class="player-actions">
+                    <form method="post" action="{{ url_for('game') }}">
+                        <input type="hidden" name="player_index" value="0">
+                        <label for="exchange_index">Exchange with Card:</label>
+                        <select id="exchange_index" name="exchange_index" required>
+                        {% for i in range(4) %}
+                            <option value="{{ i }}">{{ i+1 }}</option>
+                        {% endfor %}
+                        </select><br>
+                        <button type="submit" name="action" value="take_face_up">Take Face-Up</button>
+                        <button id="takeFaceDownBtn" type="submit" name="action" value="take_face_down" class="hide-at-start">Take Face-Down</button>
+                        <button id="leaveFaceDownBtn" type="submit" name="action" value="leave_face_down" class="hide-at-start">Leave Face-Down</button>
+                        <button id="wakeUpBtn" type="submit" name="action" value="end_game">WAKE UP!</button>
+                    </form>
+                 </div>
+
+                {% if action_result %}
+                    <div class="action-result">
+                        <p>{{ action_result.number }}{% if action_result.action %}{{ action_result.action }}{% endif %}</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+<script>
+    function revealFaceDown() {
+        var faceDownParagraph = document.querySelector('.pile .face-down p');
+        var clickDiv = document.querySelector('.pile .click');
+        var takeFaceUpButton = document.querySelector('button[value="take_face_up"]');
+        var takeFaceDownButton = document.getElementById('takeFaceDownBtn');
+        var leaveFaceDownButton = document.getElementById('leaveFaceDownBtn');
+        var wakeUpButton = document.getElementById('wakeUpBtn');
+
+        faceDownParagraph.style.opacity = '1';
+        faceDownParagraph.style.backgroundColor = 'white';
+        clickDiv.style.display = 'none';
+        takeFaceUpButton.style.display = 'none';
+
+        // Show the buttons
+        takeFaceDownButton.style.display = 'inline-block';
+        leaveFaceDownButton.style.display = 'inline-block';
+
+        // Hide the "WAKE UP!" button
+        wakeUpButton.style.display = 'none';
+    }
+</script>
+
+
+
+
+{% endblock %}

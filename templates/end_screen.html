@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Sen Game - End Screen</title>
+{% endblock %}
+
+{% block body %}
+    <div class="end-screen-container">
+        <h1>Sen Game - End Screen</h1>
+        <h2>Winner: Player {{ winner }}</h2>
+        <h3>Player Sums:</h3>
+        <ul>
+            {% for i, player_hand in enumerate(players) %}
+                <li>Player {{ i + 1 }}: {{ sum(card.number for card in player_hand) }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
