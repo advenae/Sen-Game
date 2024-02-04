@@ -48,6 +48,9 @@
                         <h3>Player {{ outer_loop_index }}'s Hand:</h3>
                         {% for card in player_hand %}
                             <div class="card">
+                            <div class="peek" onclick="peekCard()">
+                            Click<br>to<br>Peek
+                            </div>
                                 <div class="face-down">
                                     <p style="opacity: {% if turn_counter == current_player and loop.index < 3 and current_player + 1 == outer_loop_index %}1{% else %}0{% endif %}">
                                         {{ card.number }}{% if card.action %}{{ card.action }}{% endif %}
@@ -88,23 +91,58 @@
         </div>
     </div>
 <script>
-        function revealFaceDown() {
-            var faceDownParagraph = document.querySelector('.pile .face-down p');
-            var clickDiv = document.querySelector('.pile .click');
-            var takeFaceUpButton = document.querySelector('button[value="take_face_up"]');
-            var takeFaceDownButton = document.getElementById('takeFaceDownBtn');
-            var leaveFaceDownButton = document.getElementById('leaveFaceDownBtn');
-            var wakeUpButton = document.getElementById('wakeUpBtn');
+    function revealFaceDown() {
+        var faceDownParagraph = document.querySelector('.pile .face-down p');
+        var clickDiv = document.querySelector('.pile .click');
+        var takeFaceUpButton = document.querySelector('button[value="take_face_up"]');
+        var takeFaceDownButton = document.getElementById('takeFaceDownBtn');
+        var leaveFaceDownButton = document.getElementById('leaveFaceDownBtn');
+        var wakeUpButton = document.getElementById('wakeUpBtn');
 
-            // Hide buttons
-            faceDownParagraph.style.opacity = '1';
-            clickDiv.style.display = 'none';
-            takeFaceUpButton.style.display = 'none';
-            wakeUpButton.style.display = 'none';
+        // Check if the revealed card on the face-up pile is 6P
+        var faceUpCard = document.querySelector('.face-down p');
+        var isSixP = faceUpCard && faceUpCard.textContent.trim() === '6P';
 
-            // Show buttons
-            takeFaceDownButton.style.display = 'inline-block';
-            leaveFaceDownButton.style.display = 'inline-block';
+        // Toggle a class on peek divs if P6 and p not already visible
+        var peekDivs = document.querySelectorAll('.card .peek');
+        peekDivs.forEach(function(peekDiv) {
+            var opacityValue = peekDiv.nextElementSibling.querySelector('p').style.opacity;
+            peekDiv.classList.toggle('visible', isSixP && opacityValue === '0');
+        });
+
+        // Hide buttons
+        faceDownParagraph.style.opacity = '1';
+        clickDiv.style.display = 'none';
+        takeFaceUpButton.style.display = 'none';
+        wakeUpButton.style.display = 'none';
+
+        // Show buttons
+        takeFaceDownButton.style.display = 'inline-block';
+        leaveFaceDownButton.style.display = 'inline-block';
+    }
+
+    function peekCard() {
+        var selectedCard = event.target.closest('.card');
+        var opacityValue = selectedCard.querySelector('.face-down p').style.opacity;
+
+        // Toggle the opacity of the corresponding p element
+        if (opacityValue === '0') {
+            selectedCard.querySelector('.face-down p').style.opacity = '1';
+
+            // Hide all peek divs
+            var peekDivs = document.querySelectorAll('.card .peek');
+            peekDivs.forEach(function(peekDiv) {
+                peekDiv.style.display = 'none';
+            });
+
+            // Show the "Take Face-Down" button
+            document.getElementById('takeFaceDownBtn').style.display = 'inline-block';
+        } else {
+            selectedCard.querySelector('.face-down p').style.opacity = '0';
         }
+        document.getElementById('takeFaceDownBtn').style.display = 'none';
+    }
 </script>
+
+
 {% endblock %}

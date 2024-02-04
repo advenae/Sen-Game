@@ -34,8 +34,7 @@ class Deck:
 
         # Add special cards
         special_cards = [
-            (5, 'W'), (5, 'W'), (5, 'W'),
-            (6, 'P'), (6, 'P'), (6, 'P'),
+            (6, 'P'), (6, 'P'), (6, 'P'), (6, 'P'), (6, 'P'), (6, 'P'),
         ]
         for number, action in special_cards:
             self.cards.append(Card(number, action))

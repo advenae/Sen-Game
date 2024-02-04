@@ -102,6 +102,22 @@ h1 {
     z-index: 1;
 }
 
+.peek {
+    cursor: pointer;
+    position: absolute;
+    text-align: center;
+    padding-left: 2px;
+    padding-top: 30px;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: none;
+}
+
+.peek.visible {
+    display: block;
+}
+
 .player-actions .hide-at-start {
     display: none;
 }
