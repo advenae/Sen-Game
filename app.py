@@ -32,11 +32,10 @@ class Deck:
         for _ in range(9):
             self.cards.append(Card(9))
 
-        # Add 9 special cards
+        # Add special cards
         special_cards = [
-            (5, 'W'), (5, 'W'), (5, 'W'),
+            # (5, 'W'), (5, 'W'), (5, 'W'),
             (6, 'P'), (6, 'P'), (6, 'P'),
-            (7, 'Z'), (7, 'Z'), (7, 'Z')
         ]
         for number, action in special_cards:
             self.cards.append(Card(number, action))
@@ -83,10 +82,7 @@ class Game:
             return None
 
     def fill_piles(self):
-        while len(self.face_up_pile) < 2:
-            self.face_up_pile.append(deck.cards.pop(0))
-
-        while len(self.face_down_pile) < 2:
+        while len(self.face_down_pile) < 1 and deck.cards:
             self.face_down_pile.append(deck.cards.pop(0))
 
     def take_face_down_card(self, exchange_index):
@@ -102,6 +98,11 @@ class Game:
             self.face_up_pile.append(old_card)
             self.fill_piles()
             self.switch_to_next_player()
+
+            # Check if the face-down pile is empty after the exchange
+            if not self.face_down_pile:
+                self.end_game()  # End the game if the face-down deck is empty
+
             return old_card
         else:
             # Invalid exchange_index
@@ -121,6 +122,27 @@ class Game:
 
         return card
 
+    def end_game(self):
+        # Calculate the sum of points for each player
+        player_sums = [sum(card.number for card in player_hand) for player_hand in self.players]
+
+        # Find the winner (player with the lowest sum of points)
+        winner_index = min(range(len(player_sums)), key=player_sums.__getitem__)
+
+        # Redirect to the end screen
+        return redirect(url_for('end_screen', players=self.players, sums=player_sums, winner=winner_index))
+
+
+@app.route('/new_game', methods=['POST'])
+def new_game():
+    global game, deck  # Assuming you want to reset the game and deck globally
+    game = Game(num_players=2)
+    deck = Deck()
+    deck.generate_deck()
+    game.deal_cards(deck)
+    game.reveal_deck_cards(deck)
+
+    return redirect(url_for('game'))
 @app.route('/end_screen', methods=['GET', 'POST'])
 def end_screen():
     # Calculate the sum of points for each player
@@ -147,6 +169,10 @@ def game():
         elif action == 'leave_face_down':
             card = game.leave_face_down_card()
             revealed = False  # Reset revealed status
+
+        # Check if the game has ended, and if so, redirect to the end screen
+        if game.face_down_pile == []:
+            return game.end_game()
 
         return render_template('game.html',
                                players=game.players,

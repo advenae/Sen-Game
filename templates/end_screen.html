@@ -16,17 +16,27 @@
                     <div class="section">
                         {% for card in players[i] %}
                             <div class="card">
-                            <div class="face-up">
-                                <p>
-                                    {{ card.number }}
-                                </p>
-                            </div>
+                                <div class="face-up">
+                                    <p>
+                                        {{ card.number }}
+                                    </p>
+                                </div>
                             </div>
                         {% endfor %}
                     </div>
                     <p>Sum of Points: {{ sums[i] }}</p>
                 </div>
             {% endfor %}
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <div class="player-actions">
+                    <form method="post" action="{{ url_for('new_game') }}">
+                        <button type="submit">New Game</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
