@@ -26,6 +26,10 @@ body {
     align-items: center;
 }
 
+p {
+    text-align: center;
+}
+
 h1, h2, h3{
     padding: 3px;
     text-align: center;

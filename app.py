@@ -121,6 +121,16 @@ class Game:
 
         return card
 
+@app.route('/end_screen', methods=['GET', 'POST'])
+def end_screen():
+    # Calculate the sum of points for each player
+    player_sums = [sum(card.number for card in player_hand) for player_hand in game.players]
+
+    # Find the winner (player with the lowest sum of points)
+    winner_index = min(range(len(player_sums)), key=player_sums.__getitem__)
+
+    return render_template('end_screen.html', players=game.players, sums=player_sums, winner=winner_index)
+
 @app.route('/game', methods=['GET', 'POST'])
 def game():
     revealed = False  # Initialize revealed status
@@ -151,8 +161,6 @@ def game():
                            face_down_top=game.face_down_pile[-1] if game.face_down_pile else None,
                            face_up_top=game.face_up_pile[-1] if game.face_up_pile else None,
                            revealed=revealed)  # Pass revealed status to the template
-
-
 
 if __name__ == '__main__':
     game = Game(num_players=2)

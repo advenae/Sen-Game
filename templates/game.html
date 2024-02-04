@@ -71,8 +71,13 @@
                         <button type="submit" name="action" value="take_face_up">Take Face-Up</button>
                         <button id="takeFaceDownBtn" type="submit" name="action" value="take_face_down" class="hide-at-start">Take Face-Down</button>
                         <button id="leaveFaceDownBtn" type="submit" name="action" value="leave_face_down" class="hide-at-start">Leave Face-Down</button>
-                        <button id="wakeUpBtn" type="submit" name="action" value="end_game">WAKE UP!</button>
                     </form>
+                    <form method="post" action="{{ url_for('end_screen') }}" id="endScreenForm" style="display: none;">
+                        <input type="hidden" name="dummy_input" value="dummy_value">
+                    </form>
+
+    <!-- Use formaction to specify the action for this button -->
+    <button type="submit" form="endScreenForm" formaction="{{ url_for('end_screen') }}" id="wakeUpBtn">WAKE UP!</button>
                  </div>
 
                 {% if action_result %}
