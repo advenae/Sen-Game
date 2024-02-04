@@ -6,30 +6,14 @@
 
 {% block body %}
     <div class="game-container">
-    <h1>Sen Game</h1>
-    <h2>Turn: {{ turn_counter + 1 }}</h2>
-    <h2>Current Turn: Player {{ current_player + 1 }}</h2>
-        <div class="container">
-            {% for player_hand in players %}
-                <div>
-                    <h3>Player {{ loop.index }}'s Hand:</h3>
-                    <div class="section">
-                        {% for card in player_hand %}
-                            <div class="card">
-                                <div class="face-down">
-                                    <p style="opacity: {% if current_player == turn_counter and turn_counter < 2 and loop.index < 3 %}1{% else %}0{% endif %}">
-                                        {{ card.number }}{% if card.action %}{{ card.action }}{% endif %}
-                                    </p>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-
         <div class="container">
             <div class="section">
+                <h1>Sen Game</h1>
+                <h2 class="turn">Turn: {{ turn_counter + 1 }}</h2>
+                <h2 class="turn">Player: {{ current_player + 1 }}</h2>
+            </div>
+
+            <div class="section" style="margin-top: 20px">
                 <div class="pile">
                     <h3>Face-Down Pile</h3>
                     <div class="card">
@@ -56,9 +40,25 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="container">
+            <div class="section">
+                {% for player_hand in players %}
+                    {% set outer_loop_index = loop.index %}
+                    <div>
+                        <h3>Player {{ outer_loop_index }}'s Hand:</h3>
+                        {% for card in player_hand %}
+                            <div class="card">
+                                <div class="face-down">
+                                    <p style="opacity: {% if turn_counter == current_player and loop.index < 3 and current_player + 1 == outer_loop_index %}1{% else %}0{% endif %}">
+                                        {{ card.number }}{% if card.action %}{{ card.action }}{% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+
             <div class="section">
                 <div class="player-actions">
                     <form method="post" action="{{ url_for('game') }}">
@@ -88,27 +88,23 @@
         </div>
     </div>
 <script>
-    function revealFaceDown() {
-        var faceDownParagraph = document.querySelector('.pile .face-down p');
-        var clickDiv = document.querySelector('.pile .click');
-        var takeFaceUpButton = document.querySelector('button[value="take_face_up"]');
-        var takeFaceDownButton = document.getElementById('takeFaceDownBtn');
-        var leaveFaceDownButton = document.getElementById('leaveFaceDownBtn');
-        var wakeUpButton = document.getElementById('wakeUpBtn');
+        function revealFaceDown() {
+            var faceDownParagraph = document.querySelector('.pile .face-down p');
+            var clickDiv = document.querySelector('.pile .click');
+            var takeFaceUpButton = document.querySelector('button[value="take_face_up"]');
+            var takeFaceDownButton = document.getElementById('takeFaceDownBtn');
+            var leaveFaceDownButton = document.getElementById('leaveFaceDownBtn');
+            var wakeUpButton = document.getElementById('wakeUpBtn');
 
-        // Hide buttons
-        faceDownParagraph.style.opacity = '1';
-        clickDiv.style.display = 'none';
-        takeFaceUpButton.style.display = 'none';
-        wakeUpButton.style.display = 'none';
+            // Hide buttons
+            faceDownParagraph.style.opacity = '1';
+            clickDiv.style.display = 'none';
+            takeFaceUpButton.style.display = 'none';
+            wakeUpButton.style.display = 'none';
 
-        // Show buttons
-        takeFaceDownButton.style.display = 'inline-block';
-        leaveFaceDownButton.style.display = 'inline-block';
-    }
+            // Show buttons
+            takeFaceDownButton.style.display = 'inline-block';
+            leaveFaceDownButton.style.display = 'inline-block';
+        }
 </script>
-
-
-
-
 {% endblock %}

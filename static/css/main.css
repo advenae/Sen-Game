@@ -47,7 +47,7 @@ h1 {
 }
 
 .pile {
-    width: 30%;
+    width: 20%;
     display: inline-block;
     position: relative;
 }
@@ -63,7 +63,7 @@ h1 {
     background-color: white;
     width: 80px;
     height: 130px;
-    margin: 4px;
+    margin: 4px 16px;
     border-radius: 8px;
     border: solid 6px #4e272a;
 }
@@ -132,4 +132,8 @@ button:active {
     background-color: #4e272a;
 }
 
-
+.turn {
+    width: 180px;
+    display: inline-block;
+    position: relative;
+}
