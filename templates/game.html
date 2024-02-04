@@ -7,6 +7,7 @@
 {% block body %}
     <div class="game-container">
     <h1>Sen Game</h1>
+    <h2>Turn: {{ turn_counter + 1 }}</h2>
     <h2>Current Turn: Player {{ current_player + 1 }}</h2>
         <div class="container">
             {% for player_hand in players %}
@@ -15,11 +16,11 @@
                     <div class="section">
                         {% for card in player_hand %}
                             <div class="card">
-                            <div class="face-down">
-                                <p>
-                                    {{ card.number }}{% if card.action %}{{ card.action }}{% endif %}
-                                </p>
-                            </div>
+                                <div class="face-down">
+                                    <p style="opacity: {% if current_player == turn_counter and turn_counter < 2 and loop.index < 3 %}1{% else %}0{% endif %}">
+                                        {{ card.number }}{% if card.action %}{{ card.action }}{% endif %}
+                                    </p>
+                                </div>
                             </div>
                         {% endfor %}
                     </div>
@@ -95,17 +96,15 @@
         var leaveFaceDownButton = document.getElementById('leaveFaceDownBtn');
         var wakeUpButton = document.getElementById('wakeUpBtn');
 
+        // Hide buttons
         faceDownParagraph.style.opacity = '1';
-        faceDownParagraph.style.backgroundColor = 'white';
         clickDiv.style.display = 'none';
         takeFaceUpButton.style.display = 'none';
+        wakeUpButton.style.display = 'none';
 
-        // Show the buttons
+        // Show buttons
         takeFaceDownButton.style.display = 'inline-block';
         leaveFaceDownButton.style.display = 'inline-block';
-
-        // Hide the "WAKE UP!" button
-        wakeUpButton.style.display = 'none';
     }
 </script>
 
