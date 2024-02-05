@@ -31,13 +31,14 @@ p {
 }
 
 h1, h2, h3{
-    padding: 3px;
+    padding: 2px;
     text-align: center;
     font-size: 1.2em;
     font-weight: 600;
 }
 
 h1 {
+    margin-top: 10px;
     font-size: 1.4em;
 }
 
@@ -65,7 +66,7 @@ h1 {
     height: 130px;
     margin: 4px 16px;
     border-radius: 8px;
-    border: solid 6px #4e272a;
+    border: solid 4px #4e272a;
 }
 
 .card p {
@@ -152,4 +153,19 @@ button:active {
     width: 180px;
     display: inline-block;
     position: relative;
+}
+
+.nav-button {
+    width: 20%;
+    display: inline-block;
+}
+
+ol {
+    text-align: left;
+    margin-left: 50px;
+}
+
+.rules {
+    text-align: left;
+    padding: 13px 0 4px;
 }

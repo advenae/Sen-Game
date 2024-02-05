@@ -15,7 +15,7 @@
                     <h3>Player {{ i + 1 }}'s Hand:</h3>
                     <div class="section">
                         {% for card in players[i] %}
-                            <div class="card">
+                            <div class="card" style="{% if card.number == 9 %}background-color: #93AC97;{% endif %}">
                                 <div class="face-up">
                                     <p>
                                         {{ card.number }}
@@ -32,8 +32,11 @@
         <div class="container">
             <div class="section">
                 <div class="player-actions">
-                    <form method="post" action="{{ url_for('new_game') }}">
+                    <form class="nav-button" method="post" action="{{ url_for('new_game') }}">
                         <button type="submit">New Game</button>
+                    </form>
+                    <form class="nav-button" method="post" action="{{ url_for('rules') }}">
+                        <button type="submit">Rules</button>
                     </form>
                 </div>
             </div>

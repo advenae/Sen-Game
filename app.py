@@ -120,6 +120,9 @@ class Game:
     def end_game(self):
         return redirect(url_for('end_screen'))
 
+@app.route('/rules', methods=['GET', 'POST'])
+def rules():
+    return render_template('rules.html')
 @app.route('/new_game', methods=['POST'])
 def new_game():
     global game, deck
