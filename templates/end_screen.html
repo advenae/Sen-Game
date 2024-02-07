@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    <title>Sen Game - End Screen</title>
+    <title>Sen Game - Scores</title>
 {% endblock %}
 
 {% block body %}
     <div class="game-container">
-        <h1>Sen Game - End Screen</h1>
-        <h2>Winner: Player {{ winner + 1 }}</h2>
+        <h1>Sen Game - Scores</h1>
+        <h2>The winner is Player {{ winner + 1 }}</h2>
 
         <div class="container" style="margin-top: 20px">
             {% for i in range(2) %}
@@ -24,7 +24,7 @@
                             </div>
                         {% endfor %}
                     </div>
-                    <p>Sum of Points: {{ sums[i] }}</p>
+                    <p>Score: {{ sums[i] }}</p>
                 </div>
             {% endfor %}
         </div>

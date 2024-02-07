@@ -1,42 +1,40 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    <title>Sen Game Rules</title>
+    <title>Sen Game - Rules</title>
 {% endblock %}
 
 {% block body %}
     <div class="game-container">
         <div class="container">
             <div class="section">
-                <h1>Sen Game Rules</h1>
-                <p>
-                    <h2 class="rules">Preparing the Game</h2>
-                    <ol>
-                        <li>The game is played with 2 players.</li>
-                        <li>The deck consists of four cards of each number from 0 to 8, nine cards with the number 9, and 6 special cards (6P) that allow the player to see the number of any card belonging to either player.</li>
-                        <li>Each player is dealt 4 cards at the beginning of the game. Throughout the game, the players' cards lay face-down on the table.</li>
-                        <li>The rest of the deck makes up the face-down pile.</li>
-                        <li>One card is drawn from the face-down pile and placed on the table face-up; this will be the face-up pile.</li>
-                    </ol>
+                <h1>Sen Game - Rules</h1>
+                <h2 class="rules">Preparing the Game</h2>
+                <ol>
+                    <li>The game is played with 2 players.</li>
+                    <li>The deck consists of four cards of each number from 0 to 8, nine cards with the number 9, and 6 special cards (6P) that allow the player to see the number of any card belonging to either player.</li>
+                    <li>Each player is dealt 4 cards at the beginning of the game. Throughout the game, the players' cards lay face-down on the table.</li>
+                    <li>The rest of the deck makes up the face-down pile.</li>
+                    <li>One card is drawn from the face-down pile and placed on the table face-up; this will be the face-up pile.</li>
+                </ol>
 
-                    <h2 class="rules">Playing the Game</h2>
-                    <ol>
-                        <li>The goal of the game is to accumulate the fewest points by the end of the game.</li>
-                        <li>In their first turn, players get to see two of their cards.</li>
-                        <li>During the game, players take turns in which they can either draw a card from the face-down pile or from the face-up pile.</li>
-                        <li>When a player chooses a card, they can replace one of their cards with it. The replaced card is then placed on the face-up pile.</li>
-                        <li>If the card taken from the face-down pile doesn't suit the player, they can choose to place it on the face-up pile.</li>
-                        <li>If a player draws a 6P card from the face-down pile, they can either use it like a regular card (replace one of their cards with it/put it on the face-up pile) or use it to see the number of any card belonging to either player.</li>
-                        <li>At the beginning of their turn, the player can choose to end the game by clicking the "WAKE UP!" button if they believe they have the least points.</li>
-                    </ol>
+                <h2 class="rules">Playing the Game</h2>
+                <ol>
+                    <li>The goal of the game is to accumulate the fewest points by the end of the game.</li>
+                    <li>In their first turn, players get to see two of their cards.</li>
+                    <li>During the game, players take turns in which they can either draw a card from the face-down pile or from the face-up pile.</li>
+                    <li>When a player chooses a card, they can replace one of their cards with it. The replaced card is then placed on the face-up pile.</li>
+                    <li>If the card taken from the face-down pile doesn't suit the player, they can choose to place it on the face-up pile.</li>
+                    <li>If a player draws a 6P card from the face-down pile, they can either use it like a regular card (replace one of their cards with it/put it on the face-up pile) or use it to see the number of any card belonging to either player.</li>
+                    <li>At the beginning of their turn, the player can choose to end the game by clicking the "WAKE UP!" button if they believe they have the least points.</li>
+                </ol>
 
-                    <h2 class="rules">The End of the Game</h2>
-                    <ol>
-                        <li>The game ends when there are no more cards in the face-down pile or when one of the players clicks the "WAKE UP!" button.</li>
-                        <li>If a player has the highest number of 9 cards, they are not counted in their final score. If both players have the same number of 9 cards, however, they count towards their score.</li>
-                        <li>The player with the lower score wins.</li>
-                    </ol>
-                </p>
+                <h2 class="rules">The End of the Game</h2>
+                <ol>
+                    <li>The game ends when there are no more cards in the face-down pile or when one of the players clicks the "WAKE UP!" button.</li>
+                    <li>If a player has the highest number of 9 cards, they are not counted in their final score. If both players have the same number of 9 cards, however, they count towards their score.</li>
+                    <li>The player with the lower score wins.</li>
+                </ol>
                 <form method="post" action="{{ url_for('new_game') }}">
                     <button type="submit">New Game</button>
                 </form>

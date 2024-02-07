@@ -1,3 +1,6 @@
+/***********************************
+   reset, layout, initial styles
+***********************************/
 * {
     margin: 0;
     padding: 0;
@@ -46,6 +49,10 @@ h1 {
     width: 100%;
     text-align: center;
 }
+
+/***********************************
+        turns, hands, cards
+***********************************/
 
 .pile {
     width: 20%;
@@ -119,6 +126,16 @@ h1 {
     display: block;
 }
 
+.turn {
+    width: 180px;
+    display: inline-block;
+    position: relative;
+}
+
+/***********************************
+           forms, buttons
+***********************************/
+
 .player-actions .hide-at-start {
     display: none;
 }
@@ -149,16 +166,14 @@ button:active {
     background-color: #4e272a;
 }
 
-.turn {
-    width: 180px;
-    display: inline-block;
-    position: relative;
-}
-
 .nav-button {
     width: 20%;
     display: inline-block;
 }
+
+/***********************************
+        list for game rules
+***********************************/
 
 ol {
     text-align: left;
